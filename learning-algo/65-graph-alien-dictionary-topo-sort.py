@@ -1,5 +1,6 @@
 ## we make pairs do comparisons and continue
 ## create a graph and do topo sort
+## here we will always start with the smallest bcoz indegree node for it will always be zero
 import queue
 def alien_dict_topo_sort(alien_dict):
     graph = {}
