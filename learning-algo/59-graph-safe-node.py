@@ -1,4 +1,6 @@
 ## terminal node outdegree of the node is zero  ## all paths should end up at a terminal node
+
+## here we are checking for each node and only including those nodes for which any path do not lead to a cycle
 import queue
 def detect_terminal_node(graph):
     safe_nodes = []
