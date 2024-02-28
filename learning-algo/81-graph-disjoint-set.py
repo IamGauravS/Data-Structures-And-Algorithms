@@ -26,6 +26,35 @@ class disjointset:
     def is_same_set(self, x, y):
         return self.find(x) == self.find(y)
     
+class DisjointSetUsingSize:       ### important
+    def __init__(self, n):
+        self.parent = list(range(n))
+        self.size = [1] * n
+
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+
+    def union(self, x, y):
+        root_x = self.find(x)
+        root_y = self.find(y)
+
+        if root_x != root_y:
+            if self.size[root_x] < self.size[root_y]:
+                root_x, root_y = root_y, root_x   ### rootx always refer to large set that is why we are doing this
+            self.parent[root_y] = root_x
+            self.size[root_x] += self.size[root_y]
+
+    def get_size(self, x):
+        return self.size[self.find(x)]
+
+# Usage
+ds = DisjointSet(5)
+ds.union(0, 1)
+ds.union(1, 2)
+print(ds.get_size(0))  # Output: 3
+print(ds.get_size(3))  # Output: 1
 
 ds = disjointset(10)
 
