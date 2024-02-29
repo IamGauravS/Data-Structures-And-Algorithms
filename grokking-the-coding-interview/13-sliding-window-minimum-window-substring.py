@@ -22,7 +22,7 @@ def min_window(s, t):
         if s[i] in t_dict:
             s_dict[s[i]] +=1
 
-        while all(s_dict.get(ch, 0) >= t_dict[ch] for ch in t_dict):
+        while all(s_dict.get(ch) >= t_dict[ch] for ch in t_dict):
             length = i - start + 1
             if length < min_length:
                 min_length = length
