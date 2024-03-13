@@ -8,7 +8,7 @@ def top_view_of_binary_tree(root):
     map_dict = {} ## line, node
     
     while not q.empty():
-        temp = []
+        
         qsize = q.qsize()
         for _ in range(qsize):
             curr = q.get()

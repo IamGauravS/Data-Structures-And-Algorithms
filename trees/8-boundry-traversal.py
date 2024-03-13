@@ -14,7 +14,7 @@ def boundry_traversal(root):
         if root.left:
             get_left(root.left, left_output)
         else:
-            get_left(root.left, left_output)
+            get_left(root.right, left_output)
             
     def get_right(root, right_output):
         if root is None:
@@ -24,7 +24,7 @@ def boundry_traversal(root):
         if root.right:
             get_right(root.right, right_output)
         else:
-            get_right(root.right, right_output)
+            get_right(root.left, right_output)
             
         right_output.append(root.data)
     
