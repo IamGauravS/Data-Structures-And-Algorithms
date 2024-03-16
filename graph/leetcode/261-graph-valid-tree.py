@@ -29,19 +29,22 @@ class DisjointSet:
 
 
 class Solution:
-    def countComponents(self, n: int, edges: List[List[int]]) -> int:
-        
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
         ds = DisjointSet()
         for i in range(n):
             ds.add(i)
             
         for edge in edges:
             ai, bi = edge 
-            ds.union(ai, bi)
+            if ds.find(ai) != ds.find(bi):
+                ds.union(ai, bi)
+                
+            else:
+                return False 
             
-        output_set = set()
-        for i in range(n):
-            output_set.add(ds.find(i))
+        root = ds.find(0)
+        for i in range(1, n):
+            if ds.find(i) != root:
+                return False 
             
-        return len(output_set)
-            
+        return True
