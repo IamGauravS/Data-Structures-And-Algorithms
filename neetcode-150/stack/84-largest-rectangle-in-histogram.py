@@ -53,5 +53,28 @@ class Solution:
             
         
         return max_area
+    
+    
+## one loop optimised
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        
+        maxArea = 0
+        stack = []  ## pair of elements index, height 
+        
+        for i, h in enumerate(heights):
+            start = i 
+            
+            while stack and stack[-1][1] > h:
+                index, height = stack.pop()        
+                maxArea = max(maxArea, height*(i-index)) ## current-startindex of previous
+                start = index ## extend start index backwards
                 
-                
+            stack.append((start,h))
+            
+        ## the ones remaining are extended till end of the histogram
+        
+        for i, h in stack:
+            maxArea = max(maxArea, h*(len(heights) - i))
+            
+        return maxArea
