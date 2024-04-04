@@ -25,24 +25,26 @@ def check_if_queen_attacking(board, i, j):
     return False
 
 
-def canplace(board, i , no_of_queens, n):
+import copy
+
+def canplace(board, i , no_of_queens, n, solutions):
     if no_of_queens == n:
-        return 1 
+        solutions.append(copy.deepcopy(board))
+        return
     if i == n:
-        return 0
-    total_no_of_ways = 0
+        return
     for j in range(n):
         if not check_if_queen_attacking(board, i, j):
             board[i][j] = 'Q'
-            total_no_of_ways += canplace(board, i+1, no_of_queens+1, n)
-            board[i][j] = 0 
-    
-    return total_no_of_ways
+            canplace(board, i+1, no_of_queens+1, n, solutions)
+            board[i][j] = '.'  # reset the cell
 
-def n_queens(n):
-    board = [[0 for i in range(n)] for j in range(n)]
-    
-    return canplace(board, 0, 0, n)
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        board = [['.' for i in range(n)] for j in range(n)]
+        solutions = []
+        canplace(board, 0, 0, n, solutions)
+        return [[''.join(row) for row in solution] for solution in solutions]
     
     
 
