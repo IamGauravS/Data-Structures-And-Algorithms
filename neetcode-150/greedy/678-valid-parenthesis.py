@@ -56,7 +56,7 @@ class Solution:
         else:
             dp[i][o]= self.check(s,i+1,o+1,dp) or self.check(s,i+1,o-1,dp) or self.check(s,i+1,o,dp)
         return dp[i][o]
-        
+    
     def checkValidString(self, s: str) -> bool:
         dp = [[-1 for _ in range(len(s))] for _ in range(len(s))]
         return self.check(s,0,0,dp)
