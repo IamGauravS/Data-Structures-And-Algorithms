@@ -23,14 +23,14 @@ class Solution:
         else:
             if root.left:
                 root.left.val = root.val
-            if root.rightL
+            if root.rightL:
                 root.right.val = root.val
 
 
         self.changeTree(root.left)
         self.changeTree(root.right)
 
-        total = 0
+        tot = 0
 
         if root.left:
             tot+= root.left.val
