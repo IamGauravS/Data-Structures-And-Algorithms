@@ -53,3 +53,46 @@ class Solution:
             distances.append(sum(self.dp[i]))
 
         return distances
+
+
+
+class Solution:
+    def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
+
+        ## parent_sum - closer_node + further_node
+
+        adjList = defaultdict(list)
+
+        for node1, node2 in edges:
+            adjList[node1].append(node2)
+            adjList[node2].append(node1)
+
+
+        closerNodesCount = [0] * n
+        ans = [0]*n
+        seen = set()
+        def dfs(curr):
+            nonlocal closerNodesCount, ans
+            closerNodes = 1
+
+            for child in adjList[curr]:
+                if child not in seen:
+                    seen.add(child)
+                    childNodeCount = dfs(child)
+                    closerNodes += childNodeCount
+                    ans[0] += childNodeCount
+
+            closerNodesCount[curr] = closerNodes
+
+            return closerNodes
+        
+
+        seen.add(0)
+        dfs(0) ## populating closer node count and ans[0]
+
+        def dfs2(curr):
+            for 
+
+
+
+        
