@@ -23,9 +23,8 @@ class Solution:
 
             else:  # Operator
                 # Pop from stack while operators have greater or equal precedence (for left-associative operators)
-                while (len(stack) > 0 and stack[-1] != '(' and
-                       (self.priority[ch] < self.priority[stack[-1]] or
-                        (self.priority[ch] == self.priority[stack[-1]] and self.associativity[ch] == 'L'))):
+                while (len(stack) > 0 and stack[-1] != '(' and (self.priority[ch] < self.priority[stack[-1]] or 
+                                                                (self.priority[ch] == self.priority[stack[-1]] and self.associativity[ch] == 'L'))):
                     answer += stack.pop()
 
                 # Push the current operator onto the stack
