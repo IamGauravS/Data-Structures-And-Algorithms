@@ -51,3 +51,21 @@ class MinHeap:
         if smallest != index:
             self.heap[index], self.heap[smallest] = self.heap[smallest], self.heap[index]
             self._heapify_down(smallest)
+
+
+import heapq
+
+# Create an empty heap
+heap = []
+
+# Push elements onto the heap
+heapq.heappush(heap, element)
+
+# Pop the smallest element from the heap
+smallest = heapq.heappop(heap)
+
+# Peek at the smallest element without popping
+smallest = heap[0]
+
+# For a max-heap, push negative values or use a custom comparator
+heapq.heappush(heap, -element)  # Simulates a max-heap
