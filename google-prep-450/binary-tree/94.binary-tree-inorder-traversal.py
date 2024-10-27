@@ -27,3 +27,20 @@ class Solution:
         return output
 # @lc code=end
 
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        output = []
+        stack = []
+        curr = root 
+
+        while stack or curr:
+            while curr:
+                stack.append(curr)
+                curr = curr.left 
+
+            curr = stack.pop()
+            output.append(curr.val)
+            curr = stack.right 
+
+
+        return output
