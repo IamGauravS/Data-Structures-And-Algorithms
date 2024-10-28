@@ -1,25 +1,29 @@
+from collections import deque
+
 class Solution:
-    
-    #Function to return a list of nodes visible from the top view 
-    #from left to right in Binary Tree.
-    def topView(self,root):
-        
-        if root is None:
+    def topView(self, root):
+        if not root:
             return []
-            
-        leftBoundry = []
-        currNode = root.left 
         
-        while currNode:
-            leftBoundry.append(currNode.data)
-            currNode = currNode.left
-            
-        rightBoundry = []
-        currNode = root.right
+        # Dictionary to store the first node at each horizontal distance
+        top_view_map = {}
         
-        while currNode:
-            rightBoundry.append(currNode.data)
-            currNode = currNode.right
+        # Queue to store nodes along with their horizontal distance from root
+        queue = deque([(root, 0)])  # (node, horizontal_distance)
+        
+        while queue:
+            node, hd = queue.popleft()
             
-        return leftBoundry[::-1] + [root.data] + rightBoundry
-        # code here
+            # Store the node data if this horizontal distance hasn't been seen yet
+            if hd not in top_view_map:
+                top_view_map[hd] = node.data
+            
+            # Add left and right children to the queue with updated horizontal distances
+            if node.left:
+                queue.append((node.left, hd - 1))
+            if node.right:
+                queue.append((node.right, hd + 1))
+        
+        # Collecting the results in the order of horizontal distances from left to right
+        sorted_hd = sorted(top_view_map.keys())
+        return [top_view_map[hd] for hd in sorted_hd]
