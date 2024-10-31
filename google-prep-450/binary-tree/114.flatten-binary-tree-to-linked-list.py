@@ -39,3 +39,25 @@ class Solution:
         
 # @lc code=end
 
+def flatten(self, root):
+    if not root:
+        return 0
+    
+    stack = []
+
+    stack.append(root)
+
+    while stack:
+        curr = stack.pop()
+        if curr.right:
+            stack.append(curr.right)
+
+        if curr.left:
+            stack.append(curr.left)
+
+        if len(stack) > 0:
+            curr.right = stack[-1]
+
+        curr.left = None 
+
+    
