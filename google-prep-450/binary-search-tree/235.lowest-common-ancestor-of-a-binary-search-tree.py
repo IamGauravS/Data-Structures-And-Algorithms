@@ -14,6 +14,22 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root is None:
+            return None 
+        
+        while root:
+            ## if both are small
+            if p.val < root.val and q.val < root.val:
+                root = root.left 
+
+            ## if both are greater 
+            elif p.val > root.val and q.val > root.val:
+                root = root.right 
+            
+            else:
+                return root 
+            
+        return None 
         
 # @lc code=end
 
