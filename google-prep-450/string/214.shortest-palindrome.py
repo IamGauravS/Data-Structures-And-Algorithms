@@ -34,6 +34,37 @@ class Solution:
 
 # Example usage:
 
+class Solution:
+    def shortestPalindrome(self, s: str) -> str:
+        if s == "":
+            return s 
+        
+        orgStr = s 
+        reversedStr = s[::-1]
+
+        maxPalindromi = -1
+        orgKmp = 0
+        reversedKmp = 0
+        MOD = 10**9 + 7
+        base = 29
+
+        for i in range(len(orgStr)):
+            orgCh = orgStr[i]
+            orgKmp = (orgKmp*base + (ord(orgCh) - ord('a'))) % MOD 
+
+            reversedCh = reversedStr[len(orgStr)-1-i]
+            reversedKmp = (reversedKmp + (ord(reversedCh) - ord('a'))*(base ** i)) % MOD
+
+            if orgKmp == reversedKmp:
+                maxPalindromi = i 
+
+        if maxPalindromi == len(orgStr) - 1:
+            return s 
+
+        prefixToAdd = s[maxPalindromi+1:][::-1]
+
+        return prefixToAdd + orgStr 
+        
         
 # @lc code=end
 
