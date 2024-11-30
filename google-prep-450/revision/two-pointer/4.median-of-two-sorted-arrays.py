@@ -9,47 +9,48 @@ from typing import List
 
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        # Ensure nums1 is the shorter array
-        if len(nums1) > len(nums2):
+        ## nums1 should be shorter array
+        if len(nums2) < len(nums1):
             nums1, nums2 = nums2, nums1
-        
-        lenA, lenB = len(nums1), len(nums2)
-        totalLen = lenA + lenB
-        halfLen = totalLen // 2
 
-        left, right = 0, lenA
+        lenA = len(nums1)
+        lenB = len(nums2)
+
+        halfLen = (lenA + lenB)//2
+        left = 0
+        right = lenA 
 
         while left <= right:
-            partitionA = (left + right) // 2
-            partitionB = halfLen - partitionA
+            partationA = (left+right)//2
+            partationB = halfLen - partationA
 
-            maxLeftA = float('-inf') if partitionA == 0 else nums1[partitionA - 1]
-            minRightA = float('inf') if partitionA == lenA else nums1[partitionA]
+            maxLeftA = -float('inf') if partationA == 0 else nums1[partationA-1] 
+            minRightA = float('inf') if partationA == lenA else nums1[partationA]
 
-            maxLeftB = float('-inf') if partitionB == 0 else nums2[partitionB - 1]
-            minRightB = float('inf') if partitionB == lenB else nums2[partitionB]
+            maxLeftB = -float('inf') if partationB == 0 else nums2[partationB-1]
+            minRightB = float('inf') if partationB == lenB else nums2[partationB]
 
-            # Valid partition
             if maxLeftA <= minRightB and maxLeftB <= minRightA:
-                # Total length is even
-                if totalLen % 2 == 0:
-                    return (max(maxLeftA, maxLeftB) + min(minRightA, minRightB)) / 2
-                # Total length is odd
+                if (lenA+lenB)%2 == 0:
+                    return (max(maxLeftA, maxLeftB) + min(minRightA, minRightB))/2
                 else:
-                    return max(maxLeftA, maxLeftB)
-            
-            # Adjust search range
-            elif maxLeftA > minRightB:
-                right = partitionA - 1
-            else:
-                left = partitionA + 1
+                    return min(minRightA, minRightB)
 
-        raise ValueError("Input arrays are not sorted or invalid.")
+            elif maxLeftA > minRightB:
+                right = partationA - 1
+            else:
+                left = partationA + 1 
+
+        return -1
+            
+
+
+
+
+
 
 
 
         
 # @lc code=end
 
-1,4,5,6,7,9
-2,3,8
